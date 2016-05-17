@@ -1,0 +1,29 @@
+﻿@model IEnumerable<ReleaseNote.Models.OctopusProject> 
+@{
+    ViewBag.Title = "DashBoard";
+}
+
+<div class="row"></div>
+<div class="row">
+    @foreach(var project in Model){
+    <div class="col s6">
+        <ul class="collection with-header">
+            <li class="collection-header"><h5>@project.Name</h5></li>
+            <li class="collection-item">Description: @project.Description</li>
+            <li class="collection-item">
+                <p class="badge">
+                    <a href="@Url.Action("Index", "Release", new { id = @project.ReleaseId })">@project.ReleaseId</a>
+                    | @project.ReleaseVersion | @project.ReleaseCreatedOn
+                </p>
+            </li>
+            <li class="collection-item">
+                <div>
+                    &nbsp;<a href="@Url.Action("Index", "Project", new { id = @project.Id })" class="secondary-content">
+                        <i class="material-icons">send</i>
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+   }
+</div>
