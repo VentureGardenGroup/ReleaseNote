@@ -24,6 +24,9 @@ namespace ReleaseNote
             bundles.Add(new ScriptBundle("~/bundles/get-issues").Include(
                      "~/Scripts/get-issues.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/underscore").Include(
+                    "~/Scripts/underscore*"));
+
             bundles.Add(new ScriptBundle("~/bundles/knockout").Include(
                       "~/Scripts/knockout*"));
 

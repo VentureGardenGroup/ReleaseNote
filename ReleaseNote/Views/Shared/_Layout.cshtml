@@ -19,9 +19,11 @@
             @Html.ActionLink("Release Notes", "Index", "Home", null, new { @class = "brand-logo", id = "logo-container" })
             <ul class="right hide-on-med-and-down">
                 <li>@Html.ActionLink("Dashboard", "Index", "Home", null, new {@class = "navbar-brand"})</li>
+                <li>@Html.ActionLink("Manage", "Index", "Manage", null, new { @class = "navbar-brand" })</li>
             </ul>
             <ul id="nav-mobile" class="side-nav" style="left: -250px;">
-                <li>@Html.ActionLink("Dashboard", "Index", "Home", null, new { @class = "navbar-brand" })</li>
+                <li>@Html.ActionLink("Dashboard", "Index", "Home", null, new {@class = "navbar-brand"})</li>
+                <li>@Html.ActionLink("Manage", "Index", "Manage", null, new { @class = "navbar-brand" })</li>
             </ul>
             <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
         </div>

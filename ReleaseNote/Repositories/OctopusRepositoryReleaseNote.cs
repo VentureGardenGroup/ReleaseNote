@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Octopus.Client;
-using Octopus.Client.Model;
 using ReleaseNote.Models;
 using ReleaseNote.Repositories.API;
 
@@ -134,6 +133,12 @@ namespace ReleaseNote.Repositories
                     Version = x.Version
                 }).ToList()
             };
+        }
+
+
+        public IEnumerable<OctopusProject> GetProjects()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

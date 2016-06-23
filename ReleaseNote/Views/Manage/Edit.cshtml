@@ -1,0 +1,90 @@
+﻿@model ReleaseNote.Models.Project
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Project</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name)
+                @Html.ValidationMessageFor(model => model.Name)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Jira, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select name="Jira" required id="Jira" data-bind="value:$root.jiraProject,options: $root.jiraProjects(),optionsText: 'name', optionsValue: 'key',optionsCaption: '<select>', optionsAfterRender: $root.render"></select>
+                @Html.ValidationMessageFor(model => model.Jira)
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.Octopus, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select name="Octopus" required id="Octopus" data-bind="value:$root.octopusProject,options: $root.octopusProjects(),optionsText: 'Name', optionsValue: 'Id',optionsCaption: '<select>', optionsAfterRender: $root.render"></select>
+                @Html.ValidationMessageFor(model => model.Octopus)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/knockout")
+    @Scripts.Render("~/bundles/underscore")
+    <script type="text/javascript">
+        var jiraProject = "@Model.Jira";
+        var octopusProject = "@Model.Octopus";
+        var ViewModel = function() {
+            var self = this;
+
+            self.jiraProjects = ko.observableArray([]);
+            self.octopusProjects = ko.observableArray([]);
+            self.jiraProject = ko.observable(jiraProject);
+            self.octopusProject = ko.observable(octopusProject);
+
+            $.getJSON("@Url.Action("Jira","Project")", function(data) {
+                console.log(data);
+                var projects = data.projects;
+                self.jiraProjects(projects);
+            });
+            $.getJSON("@Url.Action("Octopus","Project")", function (data) {
+                console.log(data);
+                var projects = data.projects;
+                self.octopusProjects(projects);
+            });
+            self.render = function () {
+                $('select').material_select();
+            }
+        };
+        ko.applyBindings(new ViewModel());
+    </script>
+}
+
+

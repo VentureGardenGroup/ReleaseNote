@@ -1,0 +1,42 @@
+﻿@model IEnumerable<ReleaseNote.Models.Project>
+
+@{
+    ViewBag.Title = "Projects";
+}
+
+<p>
+    <a href="@Url.Action("Create", "Manage")" title="Create New Project"><i class="material-icons">add_box</i></a>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Jira)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Octopus)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Jira)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Octopus)
+        </td>
+        <td>
+            
+            <a href="@Url.Action("Edit", "Manage", new { id=item.Id })" title="Edit Project"><i class="material-icons">edit</i></a>
+        </td>
+    </tr>
+}
+
+</table>

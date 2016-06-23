@@ -15,5 +15,6 @@ namespace ReleaseNote.Repositories.API
 
        OctopusRelease UpdateReleaseNote(OctopusRelease release);
 
+       IEnumerable<OctopusProject> GetProjects();
     }
 }

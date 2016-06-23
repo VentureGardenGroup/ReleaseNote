@@ -20,8 +20,9 @@ namespace ReleaseNote.Repositories
         }
         public List<JiraProject> GetAllProjects()
         {
-            var request = new RestRequest("resource/{id}", Method.POST);
-            throw new NotImplementedException();
+            var request = new RestRequest("rest/api/2/project", Method.GET);
+            var response = Client.Execute<List<JiraProject>>(request);
+            return response.Data;
         }
 
         public JiraProject GetJiraProject(string id)
